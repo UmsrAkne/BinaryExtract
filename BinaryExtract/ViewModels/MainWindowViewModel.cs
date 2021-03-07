@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System.IO;
 
 namespace BinaryExtract.ViewModels
 {
@@ -11,8 +12,13 @@ namespace BinaryExtract.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public MainWindowViewModel()
-        {
+        private FileInfo currentFileInfo;
+        public FileInfo CurrentFileInfo {
+            get => currentFileInfo; 
+            set => SetProperty(ref currentFileInfo, value);
+        }
+
+        public MainWindowViewModel() {
 
         }
     }
