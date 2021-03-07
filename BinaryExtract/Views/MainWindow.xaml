@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
@@ -40,10 +40,7 @@
             Grid.Row="2"
             Background="{StaticResource DarkBackgroundColor}"
             Foreground="{StaticResource LightForegroundColor}">
-            <Border>
-                <TextBlock Text="StatusBar" />
-            </Border>
-
+            <TextBlock Name="FileNameTextBlock" Text="{Binding SystemMessage}" />
         </StatusBar>
     </Grid>
 

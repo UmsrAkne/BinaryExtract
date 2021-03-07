@@ -15,7 +15,16 @@ namespace BinaryExtract.ViewModels
         private FileInfo currentFileInfo;
         public FileInfo CurrentFileInfo {
             get => currentFileInfo; 
-            set => SetProperty(ref currentFileInfo, value);
+            set {
+                SystemMessage = $"{value.FullName} を読み込みました";
+                SetProperty(ref currentFileInfo, value);
+            }
+        }
+
+        private string systemMessage;
+        public string SystemMessage {
+            get => systemMessage;
+            set => SetProperty(ref systemMessage, value);
         }
 
         public MainWindowViewModel() {
