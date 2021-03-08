@@ -13,9 +13,15 @@
     <Window.Resources>
         <SolidColorBrush x:Key="DarkBackgroundColor">#444444</SolidColorBrush>
         <SolidColorBrush x:Key="LightForegroundColor">#CCCCCC</SolidColorBrush>
+
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource DarkBackgroundColor}" />
+        </Style>
+
     </Window.Resources>
-    <Grid>
+    <Grid Background="{StaticResource DarkBackgroundColor}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -24,7 +30,11 @@
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
 
         <StackPanel Grid.Row="1">
-            <TextBlock Margin="5,0,0,0" Text="検索する１６進数列を入力。[0-9,a-f],半角スペースが入力可能です。" />
+            <TextBlock
+                Margin="5,0,0,0"
+                Foreground="{StaticResource LightForegroundColor}"
+                Text="検索する１６進数列を入力。[0-9,a-f],半角スペースが入力可能です。" />
+
             <TextBox Margin="5" />
 
             <Button
@@ -36,8 +46,14 @@
 
         </StackPanel>
 
-        <StatusBar
+        <TextBlock
+            x:Name="LogTextBlock"
             Grid.Row="2"
+            Margin="5"
+            Background="DimGray" />
+
+        <StatusBar
+            Grid.Row="3"
             Background="{StaticResource DarkBackgroundColor}"
             Foreground="{StaticResource LightForegroundColor}">
             <TextBlock Name="FileNameTextBlock" Text="{Binding SystemMessage}" />
