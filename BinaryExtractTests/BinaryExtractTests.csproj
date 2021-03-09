@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Models\FileReaderTests.cs" />
+    <Compile Include="Models\HexConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
