@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using BinaryExtract.ViewModels;
 using Microsoft.Xaml.Behaviors;
 
 namespace BinaryExtract.Models {
@@ -18,7 +19,10 @@ namespace BinaryExtract.Models {
         private void AssociatedObject_Drop(object sender, DragEventArgs e) {
             // ファイルパスの一覧の配列
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            System.Diagnostics.Debug.WriteLine(files[0]);
+            var vm = ((Window)sender).DataContext as MainWindowViewModel;
+
+            // アプリの性質上、複数のファイルを扱うことはないので、仮に複数のファイルがドロップされたとしても先頭のファイルのみを取得する。
+            vm.CurrentFileInfo = new System.IO.FileInfo(files[0]);
         }
 
         private void AssociatedObject_PreviewDragOver(object sender, DragEventArgs e) {
