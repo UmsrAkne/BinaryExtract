@@ -1,4 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using BinaryExtract.Models;
+using Prism.Commands;
+using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace BinaryExtract.ViewModels
@@ -21,14 +25,40 @@ namespace BinaryExtract.ViewModels
             }
         }
 
+        private string searchPattern = "";
+        public string SearchPattern {
+            get => searchPattern;
+            set => SetProperty(ref searchPattern, value);
+        }
+
         private string systemMessage;
         public string SystemMessage {
             get => systemMessage;
             set => SetProperty(ref systemMessage, value);
         }
 
-        public MainWindowViewModel() {
+        private HexConverter HexConverter { get; } = new HexConverter();
 
+        public MainWindowViewModel() {
         }
+
+
+        public DelegateCommand SearchCommand {
+            #region
+            get => searchCommand ?? (searchCommand = new DelegateCommand(() => {
+                List<Byte> list;
+                
+                try {
+                    list = HexConverter.convertHexToDecimals(SearchPattern);
+                }
+                catch (ArgumentException) {
+                    SystemMessage = "数値の変換に失敗しました";
+                }
+
+            }));
+        }
+        private DelegateCommand searchCommand;
+        #endregion
+
     }
 }
