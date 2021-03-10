@@ -35,13 +35,14 @@
                 Foreground="{StaticResource LightForegroundColor}"
                 Text="検索する１６進数列を入力。[0-9,a-f],半角スペースが入力可能です。" />
 
-            <TextBox Margin="5" />
+            <TextBox Margin="5" Text="{Binding SearchPattern}" />
 
             <Button
                 Width="100"
                 Height="Auto"
                 Margin="5,0,5,0"
                 HorizontalAlignment="Right"
+                Command="{Binding SearchCommand}"
                 Content="検索" />
 
         </StackPanel>
