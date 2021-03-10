@@ -29,5 +29,26 @@ namespace BinaryExtract.Models {
 
             return decimals;
         }
+
+        /// <summary>
+        /// スペースで区切られた１０進数の文字列を、１０進数の数値のリストに変換します。
+        /// </summary>
+        /// <param name="decimals">Byte型の範囲の１０進数の文字列 例:"00 111 255"</param>
+        /// <returns></returns>
+        public List<Byte> toDecimals(string decimals) {
+            var decimalStrings = decimals.Split(' ');
+            var list = new List<Byte>();
+
+            for(int i = 0; i < decimalStrings.Length; i++) {
+                if (!Byte.TryParse(decimalStrings[i],out Byte result)) {
+                    throw new ArgumentException("指定された文字は、 Byte に変換できません");
+                }
+                else {
+                    list.Add(result);
+                }
+            }
+
+            return list;
+        }
     }
 }
