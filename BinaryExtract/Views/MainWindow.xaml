@@ -64,13 +64,16 @@
             x:Name="LogTextBlock"
             Grid.Row="2"
             Margin="5"
-            Background="DimGray" />
+            Padding="3"
+            Background="DimGray"
+            Foreground="{StaticResource LightForegroundColor}"
+            Text="{Binding SystemMessage}" />
 
         <StatusBar
             Grid.Row="3"
             Background="{StaticResource DarkBackgroundColor}"
             Foreground="{StaticResource LightForegroundColor}">
-            <TextBlock Name="FileNameTextBlock" Text="{Binding SystemMessage}" />
+            <TextBlock Name="FileNameTextBlock" />
         </StatusBar>
     </Grid>
 

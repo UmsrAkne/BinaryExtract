@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace BinaryExtract.ViewModels
 {
@@ -59,7 +60,7 @@ namespace BinaryExtract.ViewModels
                     list = HexConverter.convertHexToDecimals(SearchPattern);
                 }
                 catch (ArgumentException) {
-                    SystemMessage = "数値の変換に失敗しました";
+                    SystemMessage += "\r数値の変換に失敗しました";
                 }
 
             }));
@@ -72,6 +73,11 @@ namespace BinaryExtract.ViewModels
             #region
             get => splitCommand ?? (splitCommand = new DelegateCommand(() => {
                 FileReader.split(HexSearchPattern);
+
+                var strBuilder = new StringBuilder();
+                FileReader.Message.ForEach(str => strBuilder.AppendLine(str));
+                SystemMessage += $"\r{strBuilder}";
+
             }));
         }
         private DelegateCommand splitCommand;

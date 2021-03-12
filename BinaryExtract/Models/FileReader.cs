@@ -11,6 +11,8 @@ namespace BinaryExtract.Models {
         public FileInfo TargetFileInfo{ get; private set; }
         private FileStream fileStream;
 
+        public List<String> Message { private set; get; } = new List<String>();
+
         public FileReader(FileInfo targetFileInfo) {
             this.TargetFileInfo = targetFileInfo;
             fileStream = new FileStream(TargetFileInfo.FullName, FileMode.Open, FileAccess.Read);
@@ -46,6 +48,10 @@ namespace BinaryExtract.Models {
 
             }
 
+            if(positions.Count == 0) {
+                Message.Add("一致するパターンはありません");
+            }
+
             return positions;
         }
 
@@ -69,10 +75,10 @@ namespace BinaryExtract.Models {
                 fileStream.Read(arr, 0, Convert.ToInt32(spPositions[i + 1] - spPositions[i])); 
 
                 using (FileStream fs = File.Create(String.Format("{0:00000}",i))) {
+                    Message.Add($"{String.Format("{0:00000}", i)} を生成したました。");
                     fs.Write(arr, 0, arr.Length);
                 }
             }
         }
-
     }
 }
