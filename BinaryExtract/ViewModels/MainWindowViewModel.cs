@@ -10,7 +10,7 @@ namespace BinaryExtract.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private string _title = "Prism Application";
+        private string _title = "BinaryExtract";
         public string Title
         {
             get { return _title; }
