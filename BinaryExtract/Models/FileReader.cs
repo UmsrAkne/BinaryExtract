@@ -51,6 +51,11 @@ namespace BinaryExtract.Models {
 
         public void split(List<Byte> searchBytes) {
             var spPositions = search(searchBytes);
+
+            if(spPositions.Count == 0) {
+                return;
+            }
+
             fileStream.Position = spPositions[0];
 
             // ファイル終端のアドレスを加える。
