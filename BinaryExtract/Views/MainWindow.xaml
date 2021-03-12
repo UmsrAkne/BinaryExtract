@@ -37,13 +37,26 @@
 
             <TextBox Margin="5" Text="{Binding SearchPattern}" />
 
-            <Button
-                Width="100"
-                Height="Auto"
-                Margin="5,0,5,0"
-                HorizontalAlignment="Right"
-                Command="{Binding SearchCommand}"
-                Content="検索" />
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                <Button
+                    Width="100"
+                    Height="Auto"
+                    Margin="5,0,5,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SplitCommand}"
+                    Content="分割" />
+
+                <Button
+                    Width="100"
+                    Height="Auto"
+                    Margin="5,0,5,0"
+                    HorizontalAlignment="Right"
+                    Command="{Binding SearchCommand}"
+                    Content="検索" />
+
+            </StackPanel>
+
 
         </StackPanel>
 

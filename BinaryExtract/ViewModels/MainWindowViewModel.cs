@@ -21,6 +21,7 @@ namespace BinaryExtract.ViewModels
             get => currentFileInfo; 
             set {
                 SystemMessage = $"{value.FullName} を読み込みました";
+                FileReader = new FileReader(value);
                 SetProperty(ref currentFileInfo, value);
             }
         }
@@ -38,6 +39,12 @@ namespace BinaryExtract.ViewModels
         }
 
         private HexConverter HexConverter { get; } = new HexConverter();
+
+        private FileReader FileReader { set; get; } 
+
+        private List<Byte> HexSearchPattern {
+            get => HexConverter.convertHexToDecimals(SearchPattern);
+        }
 
         public MainWindowViewModel() {
         }
@@ -58,6 +65,16 @@ namespace BinaryExtract.ViewModels
             }));
         }
         private DelegateCommand searchCommand;
+        #endregion
+
+
+        public DelegateCommand SplitCommand {
+            #region
+            get => splitCommand ?? (splitCommand = new DelegateCommand(() => {
+                FileReader.split(HexSearchPattern);
+            }));
+        }
+        private DelegateCommand splitCommand;
         #endregion
 
     }
