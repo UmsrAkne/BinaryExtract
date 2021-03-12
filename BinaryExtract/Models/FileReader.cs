@@ -11,6 +11,8 @@ namespace BinaryExtract.Models {
         public FileInfo TargetFileInfo{ get; private set; }
         private FileStream fileStream;
 
+        public List<String> Message { private set; get; } = new List<String>();
+
         public FileReader(FileInfo targetFileInfo) {
             this.TargetFileInfo = targetFileInfo;
             fileStream = new FileStream(TargetFileInfo.FullName, FileMode.Open, FileAccess.Read);
@@ -32,7 +34,7 @@ namespace BinaryExtract.Models {
 
             while (readByte >= 0) {
                 readByte = fileStream.ReadByte();
-
+                System.Diagnostics.Debug.WriteLine(readByte);
                 if(readByte == searchBytes[matchedCount]) {
                     matchedCount++;
                     if(matchedCount == searchBytes.Count) {
@@ -46,8 +48,37 @@ namespace BinaryExtract.Models {
 
             }
 
+            if(positions.Count == 0) {
+                Message.Add("一致するパターンはありません");
+            }
+
             return positions;
         }
 
+        public void split(List<Byte> searchBytes) {
+            var spPositions = search(searchBytes);
+
+            if(spPositions.Count == 0) {
+                return;
+            }
+
+            fileStream.Position = spPositions[0];
+
+            // ファイル終端のアドレスを加える。
+            // ループを回す際、最後の分割位置からファイル終端までの区間もファイル化するのに必要。
+            spPositions.Add(TargetFileInfo.Length);
+
+            for(int i = 0; i < spPositions.Count -1; i++) {
+
+                // 分割位置 (spPositions) の値の下限(i)から上限(i+1)までを読み込み。配列に詰める。
+                byte[] arr = new byte[spPositions[i + 1] - spPositions[i]];
+                fileStream.Read(arr, 0, Convert.ToInt32(spPositions[i + 1] - spPositions[i])); 
+
+                using (FileStream fs = File.Create(String.Format("{0:00000}",i))) {
+                    Message.Add($"{String.Format("{0:00000}", i)} を生成したました。");
+                    fs.Write(arr, 0, arr.Length);
+                }
+            }
+        }
     }
 }
