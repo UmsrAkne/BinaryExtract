@@ -54,7 +54,7 @@ namespace BinaryExtract.ViewModels
         public DelegateCommand SearchCommand {
             #region
             get => searchCommand ?? (searchCommand = new DelegateCommand(() => {
-                List<Byte> list;
+                List<Byte> list = new List<Byte>();
                 
                 try {
                     list = HexConverter.convertHexToDecimals(SearchPattern);
@@ -63,6 +63,13 @@ namespace BinaryExtract.ViewModels
                     SystemMessage += "\r数値の変換に失敗しました";
                 }
 
+                if(list.Count > 0) {
+                    var positions = FileReader.search(list);
+                    var sb = new StringBuilder();
+                    positions.ForEach(p => sb.AppendLine(String.Format("{0:00000000}",p)));
+                    SystemMessage += $"\rマッチ {positions.Count} 件";
+                    SystemMessage += $"\r{sb}";
+                }
             }));
         }
         private DelegateCommand searchCommand;
