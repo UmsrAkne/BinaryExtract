@@ -34,7 +34,6 @@ namespace BinaryExtract.Models {
 
             while (readByte >= 0) {
                 readByte = fileStream.ReadByte();
-                System.Diagnostics.Debug.WriteLine(readByte);
                 if(readByte == searchBytes[matchedCount]) {
                     matchedCount++;
                     if(matchedCount == searchBytes.Count) {
