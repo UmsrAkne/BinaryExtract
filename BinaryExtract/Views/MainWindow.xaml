@@ -60,14 +60,14 @@
 
         </StackPanel>
 
-        <TextBlock
-            x:Name="LogTextBlock"
-            Grid.Row="2"
-            Margin="5"
-            Padding="3"
-            Background="DimGray"
-            Foreground="{StaticResource LightForegroundColor}"
-            Text="{Binding SystemMessage}" />
+        <ScrollViewer Grid.Row="2" Margin="5">
+            <TextBlock
+                x:Name="LogTextBlock"
+                Padding="3"
+                Background="DimGray"
+                Foreground="{StaticResource LightForegroundColor}"
+                Text="{Binding SystemMessage}" />
+        </ScrollViewer>
 
         <StatusBar
             Grid.Row="3"
