@@ -61,7 +61,7 @@
                 Margin="5,0,0,0"
                 Foreground="{StaticResource LightForegroundColor}"
                 Text="分割ファイルの出力先" />
-            <TextBox Margin="5" Text="{Binding OutputDirectoryPath}" />
+            <TextBox Margin="5" Text="{Binding OutputDirectoryPath, UpdateSourceTrigger=PropertyChanged}" />
 
 
         </StackPanel>
