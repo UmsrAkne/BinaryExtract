@@ -23,6 +23,7 @@ namespace BinaryExtract.ViewModels
             set {
                 SystemMessage = $"{value.FullName} を読み込みました";
                 FileReader = new FileReader(value);
+                OutputDirectoryPath = FileReader.OutputDirectoryInfo.FullName;
                 SetProperty(ref currentFileInfo, value);
             }
         }
@@ -31,6 +32,18 @@ namespace BinaryExtract.ViewModels
         public string SearchPattern {
             get => searchPattern;
             set => SetProperty(ref searchPattern, value);
+        }
+
+        private string outputDirectoryPath = "";
+        public string OutputDirectoryPath {
+            get => outputDirectoryPath;
+            set => SetProperty(ref outputDirectoryPath, value);
+        }
+
+        private string outputFileExtension = "";
+        public string OutputFileExtension {
+            get => outputFileExtension;
+            set => SetProperty(ref outputFileExtension, value);
         }
 
         private string systemMessage;
@@ -79,6 +92,8 @@ namespace BinaryExtract.ViewModels
         public DelegateCommand SplitCommand {
             #region
             get => splitCommand ?? (splitCommand = new DelegateCommand(() => {
+                FileReader.OutputDirectoryInfo = new DirectoryInfo(OutputDirectoryPath);
+                FileReader.OutputFileExtension = OutputFileExtension;
                 FileReader.split(HexSearchPattern);
 
                 var strBuilder = new StringBuilder();
