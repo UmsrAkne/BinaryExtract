@@ -33,6 +33,12 @@ namespace BinaryExtract.ViewModels
             set => SetProperty(ref searchPattern, value);
         }
 
+        private string outputDirectoryPath = "";
+        public string OutputDirectoryPath {
+            get => outputDirectoryPath;
+            set => SetProperty(ref outputDirectoryPath, value);
+        }
+
         private string systemMessage;
         public string SystemMessage {
             get => systemMessage;
