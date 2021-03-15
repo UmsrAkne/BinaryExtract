@@ -12,6 +12,7 @@ namespace BinaryExtract.Models {
         private FileStream fileStream;
 
         public DirectoryInfo OutputDirectoryInfo { get; set; } = new DirectoryInfo("output");
+        public string OutputFileExtension { get; set; } = "";
 
         public List<String> Message { private set; get; } = new List<String>();
 
@@ -79,7 +80,9 @@ namespace BinaryExtract.Models {
                 byte[] arr = new byte[spPositions[i + 1] - spPositions[i]];
                 fileStream.Read(arr, 0, Convert.ToInt32(spPositions[i + 1] - spPositions[i]));
 
-                using (FileStream fs = File.Create(OutputDirectoryInfo.FullName + "\\" + String.Format("{0:00000}", i))) {
+                string fileFullName = $"{OutputDirectoryInfo.FullName}\\{String.Format("{0:00000}", i)}{OutputFileExtension}";
+
+                using (FileStream fs = File.Create(fileFullName)) {
                     Message.Add($"{String.Format("{0:00000}", i)} を生成したました。");
                     fs.Write(arr, 0, arr.Length);
                 }

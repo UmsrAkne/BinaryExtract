@@ -40,6 +40,12 @@ namespace BinaryExtract.ViewModels
             set => SetProperty(ref outputDirectoryPath, value);
         }
 
+        private string outputFileExtension = "";
+        public string OutputFileExtension {
+            get => outputFileExtension;
+            set => SetProperty(ref outputFileExtension, value);
+        }
+
         private string systemMessage;
         public string SystemMessage {
             get => systemMessage;
@@ -87,6 +93,7 @@ namespace BinaryExtract.ViewModels
             #region
             get => splitCommand ?? (splitCommand = new DelegateCommand(() => {
                 FileReader.OutputDirectoryInfo = new DirectoryInfo(OutputDirectoryPath);
+                FileReader.OutputFileExtension = OutputFileExtension;
                 FileReader.split(HexSearchPattern);
 
                 var strBuilder = new StringBuilder();
