@@ -22,6 +22,7 @@ namespace BinaryExtract.ViewModels
             get => currentFileInfo; 
             set {
                 SystemMessage = $"{value.FullName} を読み込みました";
+                StatusBarMessage = $"作業ファイル : {value.FullName}";
                 FileReader = new FileReader(value);
                 OutputDirectoryPath = FileReader.OutputDirectoryInfo.FullName;
                 SetProperty(ref currentFileInfo, value);
@@ -50,6 +51,12 @@ namespace BinaryExtract.ViewModels
         public string SystemMessage {
             get => systemMessage;
             set => SetProperty(ref systemMessage, value);
+        }
+
+        private string statusBarMessage;
+        public string StatusBarMessage {
+            get => statusBarMessage;
+            set => SetProperty(ref statusBarMessage, value);
         }
 
         private HexConverter HexConverter { get; } = new HexConverter();

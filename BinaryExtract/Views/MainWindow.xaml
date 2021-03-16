@@ -79,7 +79,7 @@
 
         </StackPanel>
 
-        <ScrollViewer Grid.Row="2" Margin="5">
+        <ScrollViewer Grid.Row="2" Margin="5,5,5,0">
             <TextBlock
                 x:Name="LogTextBlock"
                 Padding="3"
@@ -92,7 +92,10 @@
             Grid.Row="3"
             Background="{StaticResource DarkBackgroundColor}"
             Foreground="{StaticResource LightForegroundColor}">
-            <TextBlock Name="FileNameTextBlock" />
+            <TextBlock
+                Name="FileNameTextBlock"
+                Margin="5,0"
+                Text="{Binding StatusBarMessage}" />
         </StatusBar>
     </Grid>
 
