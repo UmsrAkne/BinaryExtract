@@ -11,14 +11,23 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     AllowDrop="True">
     <Window.Resources>
-        <SolidColorBrush x:Key="DarkBackgroundColor">#444444</SolidColorBrush>
-        <SolidColorBrush x:Key="LightForegroundColor">#CCCCCC</SolidColorBrush>
 
-        <Style TargetType="Window">
-            <Setter Property="Background" Value="{StaticResource DarkBackgroundColor}" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="UIResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="DarkBackgroundColor">#444444</SolidColorBrush>
+            <SolidColorBrush x:Key="LightForegroundColor">#CCCCCC</SolidColorBrush>
+
+            <Style TargetType="Window">
+                <Setter Property="Background" Value="{StaticResource DarkBackgroundColor}" />
+            </Style>
+
+        </ResourceDictionary>
 
     </Window.Resources>
+
     <Grid Background="{StaticResource DarkBackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -80,6 +89,7 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="2" Margin="5,5,5,0">
+
             <TextBlock
                 x:Name="LogTextBlock"
                 Padding="3"
@@ -97,6 +107,7 @@
                 Margin="5,0"
                 Text="{Binding StatusBarMessage}" />
         </StatusBar>
+
     </Grid>
 
 
